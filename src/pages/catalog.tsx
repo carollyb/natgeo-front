@@ -1,12 +1,15 @@
 import { Flex } from "@chakra-ui/react"
+import ContainerLayout from "../components/Layouts/Container";
 
 function CatalogPage() {
     return (
-        <Flex
-        bgColor={'zinc'}
-        color={'mustard'}>
-            Página de catálogo
-        </Flex>
+        <ContainerLayout>
+            <Flex
+            bgColor={'zinc'}
+            color={'mustard'}>
+                Página de catálogo
+            </Flex>
+        </ContainerLayout>
     );
 }
 
