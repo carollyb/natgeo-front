@@ -1,7 +1,6 @@
 import { 
     Flex
- } from "@chakra-ui/react"
-
+} from "@chakra-ui/react";
 
 function ContainerLayout({children}: any) {
     return (
