@@ -15,7 +15,6 @@ interface IIssues {
 
 function CatalogPage() {
     const { issues } = useContext<any>(GlobalContext)
-
     return (
         <Flex
         m={{base: '10px', md: '70px', lg: '140px'}}
