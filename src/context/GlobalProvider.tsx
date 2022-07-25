@@ -17,7 +17,7 @@ function GlobalProvider({children}: any) {
   }
 
   const [ issues, setIssues ] = useState<IIssues[] | undefined>([]);
-  const [ mouseOver, setMouseOver ] = useState(false)
+  
 
   const getData = async (url: string) => {
     try {
@@ -37,9 +37,7 @@ function GlobalProvider({children}: any) {
   const context = {
     url,
     issues, 
-    setIssues,
-    mouseOver,
-    setMouseOver
+    setIssues
   }
   return (
     <GlobalContext.Provider value={context} >
