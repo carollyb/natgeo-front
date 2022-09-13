@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import GlobalContext from "./Context";
 import axios from 'axios';
+import useIssueStore from "../domain/shared/stores/useIssueStore";
 
 function GlobalProvider({children}: any) {
 
@@ -17,22 +18,6 @@ function GlobalProvider({children}: any) {
   }
 
   const [ issues, setIssues ] = useState<IIssues[] | undefined>([]);
-  
-
-  const getData = async (url: string) => {
-    try {
-        const response = await axios.get(`${url}/issues`);
-        const results = response.data;
-        setIssues(results)
-        console.log(issues);
-    } catch (error: Error | any) {
-        console.log(`${error.message}`);
-    }
-  }
-  
-  useEffect(() => {
-    getData(url)
-  }, [])
   
   const context = {
     url,

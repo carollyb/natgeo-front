@@ -1,10 +1,11 @@
 import { Flex, Text, Button } from "@chakra-ui/react"
 import ContainerLayout from "../components/Layouts/Container";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GlobalContext } from "../context/Context";
 import IssueCard from "../components/IssueCard/IssueCard";
+import useIssueStore from "../domain/shared/stores/useIssueStore";
 
-interface IIssues {
+export type IIssues = {
     id?: string;
     number: number;
     date: Date;
@@ -15,7 +16,23 @@ interface IIssues {
 }
 
 function CatalogPage() {
-    const { issues } = useContext<any>(GlobalContext)
+  const { issues, setIssues, url } = useContext<any>(GlobalContext)
+  const fetchIssues = useIssueStore(state => state.fetchIssues)
+
+  const getData = async (url: string) => {
+    try {
+        const issues = fetchIssues()
+        setIssues(issues)
+        console.log(issues);
+    } catch (error: Error | any) {
+        console.log(`${error.message}`);
+    }
+  }
+  
+  useEffect(() => {
+    getData(url)
+  }, [])
+  
     return (
         <Flex
         m={{base: '10px', md: '70px', lg: '140px'}}
