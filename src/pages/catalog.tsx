@@ -16,21 +16,19 @@ export type IIssues = {
 }
 
 function CatalogPage() {
-  const { issues, setIssues, url } = useContext<any>(GlobalContext)
-  const fetchIssues = useIssueStore(state => state.fetchIssues)
+  
+  const { issues, fetchIssues } = useIssueStore()
 
-  const getData = async (url: string) => {
+  const getData = async () => {
     try {
-        const issues = fetchIssues()
-        setIssues(issues)
-        console.log(issues);
+        await fetchIssues()
     } catch (error: Error | any) {
         console.log(`${error.message}`);
     }
   }
   
   useEffect(() => {
-    getData(url)
+    getData()
   }, [])
   
     return (
