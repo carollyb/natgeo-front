@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import GlobalContext from "./Context";
 import axios from 'axios';
 import useIssueStore from "../domain/shared/stores/useIssueStore";
+import { BASE_URL } from "../consts";
 
 function GlobalProvider({children}: any) {
 
-  const url = 'http://localhost:3002'
+  const url = BASE_URL
 
   interface IIssues {
     id?: string;
@@ -21,8 +22,6 @@ function GlobalProvider({children}: any) {
   
   const context = {
     url,
-    issues, 
-    setIssues
   }
   return (
     <GlobalContext.Provider value={context} >
