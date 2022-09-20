@@ -33,8 +33,8 @@ function IssueCard({number, date, cover, file, language, topics}: TCardProps) {
       borderColor={'mustard'}
       borderRadius={'20px'}
       _hover={{
-            h: '499px',
-            boxShadow: 'lg'
+        h: '499px',
+        boxShadow: 'lg'
       }}
       onMouseEnter={() => setMouseOver(true)}
       onMouseLeave={() => setMouseOver(false)}
