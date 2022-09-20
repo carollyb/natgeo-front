@@ -1,4 +1,3 @@
-import axios from "axios"
 import create from "zustand"
 import { IIssues } from "../../../pages/catalog"
 import IssuesServicesFactory from "../../modules/issues/factories/IssuesServicesFactory"
@@ -14,7 +13,8 @@ const useIssueStore = create<IssueState>((set) => ({
   issues: [],
   fetchIssues: async () => {
     const response = await getAllIssues.execute()
-    set((state) => ({ issues: response }))}
+    set({ issues: response })
+  }
 }))
 
 export default useIssueStore
