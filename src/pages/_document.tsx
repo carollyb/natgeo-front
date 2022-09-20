@@ -4,7 +4,12 @@ export default class Document extends NextDocument {
   render() {
     return (
       <Html lang='pt'>
-        <Head />
+        <Head>
+          <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Sen&display=swap"
+          rel="stylesheet"
+          />
+        </Head>
         <meta 
         title='National Geographic'
         />
