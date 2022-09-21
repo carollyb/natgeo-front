@@ -7,7 +7,7 @@ function ContainerLayout({children}: any) {
         <Flex
         m={{base: '10px', md: '70px', lg: '140px'}}
         direction={'row'}
-        justify={'center'}>
+        justify={'space-between'}>
             {children}
         </Flex>
     );

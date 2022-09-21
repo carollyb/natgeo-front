@@ -31,26 +31,26 @@ function CatalogPage() {
   }, [])
   
     return (
-        <Flex
-        backgroundColor={'zinc'}
-        direction={'column'}
-        gap={'37px'}>
-            <ContainerLayout>
-                {issues && issues.map((issue: IIssues, key: any) => {
-                    return (
-                        <IssueCard
-                        key={key}
-                        number={issue.number}
-                        date={issue.date}
-                        cover={issue.cover}
-                        file={issue.file}
-                        language={issue.language}
-                        topics={issue.topics}
-                        ></IssueCard>
-                    )
-                })}
-            </ContainerLayout>
-        </Flex>
+      <Flex
+      backgroundColor={'zinc'}
+      direction={'column'}
+      gap={'37px'}>
+        <ContainerLayout>
+          {issues && issues.map((issue: IIssues, key: any) => {
+            return (
+              <IssueCard
+              key={key}
+              number={issue.number}
+              date={issue.date}
+              cover={issue.cover}
+              file={issue.file}
+              language={issue.language}
+              topics={issue.topics}
+              ></IssueCard>
+            )
+          })}
+        </ContainerLayout>
+      </Flex>
     );
 }
 
