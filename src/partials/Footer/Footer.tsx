@@ -43,7 +43,6 @@ const footerContentGenres = [
   },
 ]
 
-
 function FooterComponent() {
   return (
     <>

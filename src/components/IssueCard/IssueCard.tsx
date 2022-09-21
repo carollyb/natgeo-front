@@ -28,13 +28,15 @@ function IssueCard({number, date, cover, file, language, topics}: TCardProps) {
       p={'20px'}
       fontFamily={'Sen'}
       border={'solid'}
+      borderWidth={'thin'}
       backgroundColor={'zinc'}
+      borderColor={'zinc'}
+      borderRadius={'10px'}
+      boxShadow={'lg'}
       color={'mustard'}
-      borderColor={'mustard'}
-      borderRadius={'20px'}
       _hover={{
-        h: '499px',
-        boxShadow: 'lg'
+        h: '559px',
+        borderColor: 'mustard'
       }}
       onMouseEnter={() => setMouseOver(true)}
       onMouseLeave={() => setMouseOver(false)}
@@ -42,7 +44,7 @@ function IssueCard({number, date, cover, file, language, topics}: TCardProps) {
         <Flex
           w={'220px'}
           h={'307px'}
-          borderRadius={'20px'}
+          borderRadius={'10px'}
           overflow={'hidden'}>
             <Image
               objectFit={'cover'}
@@ -64,21 +66,25 @@ function IssueCard({number, date, cover, file, language, topics}: TCardProps) {
             align={'center'}>
                 <Text
                 >
-                    {cover}
+                  {cover}
                 </Text>
                 <Text
                 >
-                    {language}
+                  {language}
                 </Text>
                 <Text
                 >
-                    {topics}
+                  {topics}
                 </Text>
                 <Button
                 color={'white'}
                 backgroundColor={'mustard'}
-                gap={'15px'}>
-                    <BookOpen />
+                gap={'15px'}
+                _hover={{
+                  backgroundColor: 'darkBrown'
+                }}
+                >
+                  <BookOpen />
                     Acessar
                 </Button>
             </Flex> }
