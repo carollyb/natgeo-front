@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import IssueCard from "../components/IssueCard/IssueCard";
 import useIssueStore from "../domain/shared/stores/useIssueStore";
 import useS3Store from "../domain/shared/stores/useS3Store";
+import axios from "axios";
 
 export type IIssues = {
     id?: string;
@@ -19,6 +20,7 @@ function CatalogPage() {
   
   const [selectedFile, setSelectedFile] = useState<any>();
   const [isFilePicked, setIsFilePicked] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const { issues, fetchIssues } = useIssueStore()
   const { fetchS3url, s3url } = useS3Store()
@@ -37,8 +39,17 @@ function CatalogPage() {
   }
   const handleSubmit = async () => {
     await fetchS3url()
-    
+
+    await fetch(s3url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "image/jpg"
+      },
+      body: selectedFile
+    })
+    setLoading(false)
   }
+  const imageUrl = s3url.split('?')[0]
   
   useEffect(() => {
     getData()
@@ -62,8 +73,14 @@ function CatalogPage() {
         <div>
           <Text
           color='white'>{isFilePicked && selectedFile.name}</Text>
+          <Button
+          onClick={() => console.log(imageUrl)}
+          >clique
+          </Button>
         </div>
         <ContainerLayout>
+          {!loading && <img
+          src={imageUrl} />}
           {issues && issues.map((issue: IIssues, key: any) => {
             return (
               <IssueCard
