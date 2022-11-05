@@ -47,8 +47,8 @@ function IssueCard({number, date, cover, file, language, topics}: TCardProps) {
           borderRadius={'10px'}
           overflow={'hidden'}>
             <Image
-              objectFit={'cover'}
-              src="https://img.freepik.com/free-psd/books-cover-mockup_145224-172.jpg" />
+              objectFit="contain"
+              src={cover} />
         </Flex>
         <Text
           fontWeight={'bold'}
@@ -66,7 +66,7 @@ function IssueCard({number, date, cover, file, language, topics}: TCardProps) {
             align={'center'}>
                 <Text
                 >
-                  {cover}
+                  Revista
                 </Text>
                 <Text
                 >
