@@ -1,9 +1,11 @@
-import { Flex, Text, Button } from "@chakra-ui/react"
+import { Flex, Button, Text } from "@chakra-ui/react"
 import ContainerLayout from "../components/Layouts/Container";
-import { useContext, useEffect } from "react";
-import { GlobalContext } from "../context/Context";
+import { useEffect, useState } from "react";
 import IssueCard from "../components/IssueCard/IssueCard";
 import useIssueStore from "../domain/shared/stores/useIssueStore";
+import useS3Store from "../domain/shared/stores/useS3Store";
+import axios from "axios";
+import BoxContainer from "../components/Layouts/Box";
 
 export type IIssues = {
     id?: string;
@@ -16,45 +18,40 @@ export type IIssues = {
 }
 
 function CatalogPage() {
-  const { issues, setIssues, url } = useContext<any>(GlobalContext)
-  const fetchIssues = useIssueStore(state => state.fetchIssues)
+  
+  const { issues, fetchIssues } = useIssueStore()
+  const { fetchS3url, s3url } = useS3Store()
 
-  const getData = async (url: string) => {
+  const getData = async () => {
     try {
-        const issues = fetchIssues()
-        setIssues(issues)
-        console.log(issues);
+        await fetchIssues()
     } catch (error: Error | any) {
         console.log(`${error.message}`);
     }
   }
   
   useEffect(() => {
-    getData(url)
+    getData()
   }, [])
   
     return (
-        <Flex
-        m={{base: '10px', md: '70px', lg: '140px'}}
-        direction={'column'}
-        gap={'37px'}>
-            <ContainerLayout>
-                
-                {issues && issues.map((issue: IIssues, key: any) => {
-                    return (
-                        <IssueCard
-                        key={key}
-                        number={issue.number}
-                        date={issue.date}
-                        cover={issue.cover}
-                        file={issue.file}
-                        language={issue.language}
-                        topics={issue.topics}
-                        ></IssueCard>
-                    )
-                })}
-            </ContainerLayout>
-        </Flex>
+      <BoxContainer>
+        <ContainerLayout>
+          {issues && issues.map((issue: IIssues, key: any) => {
+            return (
+              <IssueCard
+              key={key}
+              number={issue.number}
+              date={issue.date}
+              cover="https://natgeo-issues-1.s3.sa-east-1.amazonaws.com/br-cover-25.jpg" /* cover={`"https://natgeo-issues-1.s3.sa-east-1.amazonaws.com/"${issue.cover}`} */
+              file={issue.file}
+              language={issue.language}
+              topics={issue.topics}
+              ></IssueCard>
+            )
+          })}
+        </ContainerLayout>
+      </BoxContainer>
     );
 }
 
