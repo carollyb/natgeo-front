@@ -4,15 +4,18 @@ import {
   Input,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText, } from "@chakra-ui/react";
+  FormErrorMessage
+ } from "@chakra-ui/react";
 import { useState } from "react";
+import CustomInput from "../components/CustomInput";
 import BoxContainer from "../components/Layouts/Box";
 import useS3Store from "../domain/shared/stores/useS3Store";
 
 function AddIssueForm() {
   const [selectedFile, setSelectedFile] = useState<any>();
   const [isFilePicked, setIsFilePicked] = useState(false)
+  const [isIssueFilePicked, setIsIssueFilePicked] = useState(false)
+  const [selectedIssueFile, setSelectedIssueFile] = useState<any>();
   const [loading, setLoading] = useState(true)
 
   const { fetchS3url, s3url } = useS3Store()
@@ -42,42 +45,52 @@ function AddIssueForm() {
     <FormControl
     onSubmit={handleSubmit}
     width="30%"
-    color="white">
+    color="white"
+    >
       <FormLabel>Número</FormLabel>
-      <Input
+      <CustomInput
       type="text"
       name="number" />
       <FormLabel>Data</FormLabel>
-      <Input
+      <CustomInput
       type="text"
       name="date" />
-      <FormLabel>Arquivo da capa</FormLabel>
-      <Input
-      type="file"
-      name="cover"
-      onChange={changeHandler} />
-      <FormLabel>Arquivo da revista</FormLabel>
-      <Input
+      <label>
+        Arquivo da capa
+        <p>{isFilePicked ? selectedFile.name : 'Selecione...'}</p>
+        <CustomInput
+        type="file"
+        name="cover"
+        display="none"
+        onChange={changeHandler} />
+      </label>
+      <label>
+        Arquivo da revista
+        <p>{isIssueFilePicked ? selectedIssueFile.name : 'Selecione...'}</p>
+        <CustomInput
+        type="file"
+        name="cover"
+        display="none"/>
+      </label>
+      <CustomInput
       type="file"
       name="file" />
       <FormLabel>Idioma</FormLabel>
-      <Input
+      <CustomInput
       type="text"
       name="language" />
       <FormLabel>Tópicos</FormLabel>
-      <Input
+      <CustomInput
       type="text"
       name="topics" />
     </FormControl>
     <div>
-      <Text
-        color='white'>{isFilePicked && selectedFile.name}
-      </Text>
+      
       <Button
       onClick={() => console.log(imageUrl)}
       >clique
         </Button>
-      </div>
+    </div>
   </BoxContainer>
   );
 }
