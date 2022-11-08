@@ -5,6 +5,7 @@ import IssueCard from "../components/IssueCard/IssueCard";
 import useIssueStore from "../domain/shared/stores/useIssueStore";
 import useS3Store from "../domain/shared/stores/useS3Store";
 import axios from "axios";
+import BoxContainer from "../components/Layouts/Box";
 
 export type IIssues = {
     id?: string;
@@ -18,10 +19,6 @@ export type IIssues = {
 
 function CatalogPage() {
   
-  const [selectedFile, setSelectedFile] = useState<any>();
-  const [isFilePicked, setIsFilePicked] = useState(false)
-  const [loading, setLoading] = useState(true)
-
   const { issues, fetchIssues } = useIssueStore()
   const { fetchS3url, s3url } = useS3Store()
 
@@ -32,52 +29,13 @@ function CatalogPage() {
         console.log(`${error.message}`);
     }
   }
-
-  const changeHandler = async (event: any) => {
-    setSelectedFile(event.target.files[0])
-    setIsFilePicked(true)
-  }
-  const handleSubmit = async () => {
-    await fetchS3url()
-
-    await fetch(s3url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "image/jpg"
-      },
-      body: selectedFile
-    })
-    setLoading(false)
-  }
-  const imageUrl = s3url.split('?')[0]
   
   useEffect(() => {
     getData()
-  }, [isFilePicked])
+  }, [])
   
     return (
-      <Flex
-      backgroundColor={'zinc'}
-      direction={'column'}
-      gap={'37px'}>
-        <form>
-          <input
-          type="file"
-          name="file"
-          onChange={changeHandler} />
-          <Button
-          onClick={handleSubmit}
-          >clique
-          </Button>
-        </form>
-        <div>
-          <Text
-          color='white'>{isFilePicked && selectedFile.name}</Text>
-          <Button
-          onClick={() => console.log(imageUrl)}
-          >clique
-          </Button>
-        </div>
+      <BoxContainer>
         <ContainerLayout>
           {issues && issues.map((issue: IIssues, key: any) => {
             return (
@@ -93,7 +51,7 @@ function CatalogPage() {
             )
           })}
         </ContainerLayout>
-      </Flex>
+      </BoxContainer>
     );
 }
 
