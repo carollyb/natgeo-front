@@ -1,8 +1,11 @@
-import { Flex, Text, Button } from "@chakra-ui/react"
+import { Flex, Button, Text } from "@chakra-ui/react"
 import ContainerLayout from "../components/Layouts/Container";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import IssueCard from "../components/IssueCard/IssueCard";
 import useIssueStore from "../domain/shared/stores/useIssueStore";
+import useS3Store from "../domain/shared/stores/useS3Store";
+import axios from "axios";
+import BoxContainer from "../components/Layouts/Box";
 
 export type IIssues = {
     id?: string;
@@ -17,6 +20,7 @@ export type IIssues = {
 function CatalogPage() {
   
   const { issues, fetchIssues } = useIssueStore()
+  const { fetchS3url, s3url } = useS3Store()
 
   const getData = async () => {
     try {
@@ -31,10 +35,7 @@ function CatalogPage() {
   }, [])
   
     return (
-      <Flex
-      backgroundColor={'zinc'}
-      direction={'column'}
-      gap={'37px'}>
+      <BoxContainer>
         <ContainerLayout>
           {issues && issues.map((issue: IIssues, key: any) => {
             return (
@@ -42,7 +43,7 @@ function CatalogPage() {
               key={key}
               number={issue.number}
               date={issue.date}
-              cover={issue.cover}
+              cover="https://natgeo-issues-1.s3.sa-east-1.amazonaws.com/br-cover-25.jpg" /* cover={`"https://natgeo-issues-1.s3.sa-east-1.amazonaws.com/"${issue.cover}`} */
               file={issue.file}
               language={issue.language}
               topics={issue.topics}
@@ -50,7 +51,7 @@ function CatalogPage() {
             )
           })}
         </ContainerLayout>
-      </Flex>
+      </BoxContainer>
     );
 }
 

@@ -33,22 +33,25 @@ function HeaderComponent() {
       align={{base: 'flex-start', md: 'center'}}
       gap={{base: isOpen ? '20px': '40px', md: '10px'}}
       >
-          <Flex
-          gap={'30px'}>
-              <IconButton
-                  size={'lg'}
-                  icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-                  aria-label={'Open Menu'}
-                  display={{ base: 'flex', md: 'none' }}
-                  onClick={isOpen ? onClose : onOpen}
-                  />
+        <Flex
+        gap={'30px'}>
+          <IconButton
+            size={'lg'}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={'Open Menu'}
+            display={{ base: 'flex', md: 'none' }}
+            onClick={isOpen ? onClose : onOpen}
+            />
               <Link href="/"><Text
               fontFamily={'Sen'}
               color={'mustard'}
               fontSize={'36px'}
-              fontWeight={'bold'}>NatGeo</Text></Link>
+              fontWeight={'bold'}
+              _hover={{
+                cursor: 'pointer'
+              }}
+              >NatGeo</Text></Link>
           </Flex>
-
           <Flex
           p={isOpen ? '30px': '0px'}
           backgroundColor={isOpen ? 'backgroundSection': 'transparent'}
