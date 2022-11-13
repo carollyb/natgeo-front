@@ -35,7 +35,6 @@ function CatalogPage() {
   }, [])
   
     return (
-      <BoxContainer>
         <ContainerLayout>
           {issues && issues.map((issue: IIssues, key: any) => {
             return (
@@ -43,7 +42,7 @@ function CatalogPage() {
               key={key}
               number={issue.number}
               date={issue.date}
-              cover="https://natgeo-issues-1.s3.sa-east-1.amazonaws.com/br-cover-25.jpg" /* cover={`"https://natgeo-issues-1.s3.sa-east-1.amazonaws.com/"${issue.cover}`} */
+              cover={`https://natgeo-issues-1.s3.sa-east-1.amazonaws.com/${issue.cover}.jpg`}
               file={issue.file}
               language={issue.language}
               topics={issue.topics}
@@ -51,7 +50,6 @@ function CatalogPage() {
             )
           })}
         </ContainerLayout>
-      </BoxContainer>
     );
 }
 
