@@ -7,7 +7,7 @@ import {
   FormErrorMessage
  } from "@chakra-ui/react";
 import { useState } from "react";
-import CustomInput from "../components/CustomInput";
+import CustomInput from "../components/CustomInput/CustomInput";
 import BoxContainer from "../components/Layouts/Box";
 import useS3Store from "../domain/shared/stores/useS3Store";
 

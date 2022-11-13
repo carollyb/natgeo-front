@@ -21,7 +21,7 @@ function IssueCard({number, date, cover, file, language, topics}: TCardProps) {
   return (
     <Flex
       w={'262px'}
-      h={'439px'}
+      h={mouseOver ? '100%' : '439px'}
       direction={'column'}
       justify={'space-between'}
       align={'center'}
@@ -35,7 +35,6 @@ function IssueCard({number, date, cover, file, language, topics}: TCardProps) {
       boxShadow={'lg'}
       color={'mustard'}
       _hover={{
-        h: '559px',
         borderColor: 'mustard'
       }}
       onMouseEnter={() => setMouseOver(true)}
@@ -43,11 +42,14 @@ function IssueCard({number, date, cover, file, language, topics}: TCardProps) {
       >
         <Flex
           w={'220px'}
-          h={'307px'}
+          minHeight={'307px'}
           borderRadius={'10px'}
           overflow={'hidden'}>
             <Image
-              objectFit="contain"
+              objectFit="fill"
+              w='100%'
+              h='auto'
+              alignItems='center'
               src={cover} />
         </Flex>
         <Text
@@ -55,12 +57,6 @@ function IssueCard({number, date, cover, file, language, topics}: TCardProps) {
           fontSize={'20px'}
           textAlign={'center'}
           >Nº{number}</Text>
-        <Text
-          color={'lightGray'}
-          textAlign={'center'}
-        >
-                {file}
-            </Text>
             {mouseOver && <Flex
             direction={'column'}
             align={'center'}>
